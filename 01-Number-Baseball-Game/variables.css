@@ -1,6 +1,7 @@
 :root {
-  --screen-color: #753682;
-  --component-color: rgba(255, 255, 255, 0.4);
-  --btn-color: rgba(255, 255, 255, 0.6);
-  --thick-color: rgba(255, 255, 255, 0.2);
+  --component-color: rgba(255, 255, 255, 0.05);
+  --btn-color: rgba(255, 255, 255, 0.4);
+  --number-btn-color: rgba(255, 255, 255, 0.35);
+  --input-bar-color: rgba(255, 255, 255, 0.2);
+  --previous-color: rgb(8, 96, 168, 0.4);
 }
