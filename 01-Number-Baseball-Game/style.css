@@ -101,7 +101,7 @@ div {
 }
 .input-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 0.5rem 0.5rem 0 0;
   padding: 0.5rem;
   background-color: var(--input-bar-color);
@@ -112,8 +112,11 @@ div {
   margin: 0 0.2rem 0 0.2rem;
   background-color: var(--btn-color);
 }
+.input-row__btn:last-child {
+  width: 1.5rem;
+}
 .input-row__btn:hover {
-  transform: scale(1.05, 1.05);
+  transform: scale(1.1, 1.1);
 }
 .input-row__input {
   width: 2rem;
@@ -131,12 +134,16 @@ div {
   justify-content: space-around;
 }
 .number-board__btn {
-  height: 2rem;
-  width: 2rem;
+  font-size: 38px;
+  height: 2.3rem;
+  width: 2.3rem;
   border-radius: 0.5rem;
   margin: 0.2rem;
   background-color: var(--number-btn-color);
 }
 .number-board__btn:hover {
   transform: scale(1.1, 1.1);
+}
+.hidden {
+  display: none;
 }

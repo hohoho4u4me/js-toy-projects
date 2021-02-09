@@ -35,6 +35,8 @@ const submitNumber = function () {
       round++;
       if (round == 9) {
         alert("game over");
+      } else {
+        previousRecordRow[round].classList.remove("hidden");
       }
     }
   }
