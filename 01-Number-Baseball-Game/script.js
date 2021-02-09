@@ -33,30 +33,67 @@ const submitNumber = function () {
     if (ballIndex == 3) {
       let strike = 0;
       let ball = 0;
+      //update ballValue to previous record
       for (let i = 0; i < 3; i++) {
         previousRecordRow[round].childNodes[3].childNodes[2 * i + 1].innerText =
           ballValue[i];
         inputRowInput[i].innerText = "";
-        if (answerValue[i] == ballValue[i]) strike++;
-        else if (answerValue.includes(ballValue[i])) ball++;
-        ballValue[i] = "";
       }
+      console.log(ballValue);
+      //check strike, remove ball
+      for (let i = 0; i < 3; i++) {
+        if (answerValue[i] === ballValue[i]) {
+          strike++;
+          for (let j = 0; j < 3; j++) {
+            if (i === j) continue;
+            if (ballValue[i] === ballValue[j]) ballValue[j] = "";
+          }
+          ballValue[i] = "";
+        }
+      }
+      //check ball
+      for (let i = 0; i < 3; i++) {
+        if (answerValue.includes(ballValue[i])) {
+          ball++;
+          for (let j = 0; i < 3; i++) {
+            if (i == j) continue;
+            if (ballValue[i] === ballValue[j]) ballValue[j] = "";
+          }
+          ballValue[i] = "";
+        }
+      }
+      //print strike/ball number
       previousRecordRow[round].childNodes[5].childNodes[1].innerText = strike;
       previousRecordRow[round].childNodes[5].childNodes[5].innerText = ball;
+      //win condition
       if (strike == 3) {
         alert("win!!");
         soundWin.play();
-        round = 9;
+        round = 10;
       }
-      ballIndex = 0;
-      round++;
+      //lose condition
       if (round == 9) {
         alert("game over");
         soundFail.play();
-      } else if (round < 9) {
+      }
+      //ready for next round
+      ballValue = [];
+      ballIndex = 0;
+      round++;
+      if (round < 9) {
         previousRecordRow[round].classList.remove("hidden");
       }
     }
+  }
+};
+const eraseNumber = function (round) {
+  for (let i = 0; i < 3; i++) {
+    previousRecordRow[round].childNodes[3].childNodes[2 * i + 1].innerText = "";
+  }
+  previousRecordRow[round].childNodes[5].childNodes[1].innerText = "";
+  previousRecordRow[round].childNodes[5].childNodes[5].innerText = "";
+  if (round != 0) {
+    previousRecordRow[round].classList.add("hidden");
   }
 };
 const setAnswerValue = function () {
@@ -67,8 +104,17 @@ const setAnswerValue = function () {
     answerValue[2]++;
   if (Math.max(answerValue[0], answerValue[1]) <= answerValue[2])
     answerValue[2]++;
+  console.log(answerValue);
 };
 
+const replay = function () {
+  for (let i = 0; i < 3; i++) deleteNumber();
+  for (let i = 0; i < 9; i++) eraseNumber(i);
+  ballValue = [];
+  ballIndex = 0;
+  round = 0;
+  setAnswerValue();
+};
 const playSound = function (audioName) {
   if (audioName === "click") {
     soundClick.play();
@@ -91,4 +137,5 @@ for (let i = 0; i < 3; i++) {
 }
 inputRowBtn[0].addEventListener("click", deleteNumber);
 inputRowBtn[1].addEventListener("click", submitNumber);
+inputRowBtn[2].addEventListener("click", replay);
 setAnswerValue();
