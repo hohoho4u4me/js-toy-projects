@@ -39,7 +39,6 @@ const submitNumber = function () {
           ballValue[i];
         inputRowInput[i].innerText = "";
       }
-      console.log(ballValue);
       //check strike, remove ball
       for (let i = 0; i < 3; i++) {
         if (answerValue[i] === ballValue[i]) {
@@ -72,7 +71,7 @@ const submitNumber = function () {
         round = 10;
       }
       //lose condition
-      if (round == 9) {
+      if (round == 8 && strike != 3) {
         alert("game over");
         soundFail.play();
       }
@@ -104,7 +103,6 @@ const setAnswerValue = function () {
     answerValue[2]++;
   if (Math.max(answerValue[0], answerValue[1]) <= answerValue[2])
     answerValue[2]++;
-  console.log(answerValue);
 };
 
 const replay = function () {
