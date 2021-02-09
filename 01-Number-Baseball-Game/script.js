@@ -9,6 +9,10 @@ const numberBoardBtn = document.querySelectorAll(".number-board__btn");
 const inputRowInput = document.querySelectorAll(".input-row__input");
 const inputRowBtn = document.querySelectorAll(".input-row__btn");
 const previousRecordRow = document.querySelectorAll(".previous-record__row");
+const soundClick = document.querySelector("#sound-click");
+const soundPop = document.querySelector("#sound-pop");
+const soundWin = document.querySelector("#sound-win");
+const soundFail = document.querySelector("#sound-fail");
 
 const enterNumber = function () {
   if (0 <= ballIndex && ballIndex <= 2) {
@@ -41,12 +45,14 @@ const submitNumber = function () {
       previousRecordRow[round].childNodes[5].childNodes[5].innerText = ball;
       if (strike == 3) {
         alert("win!!");
+        soundWin.play();
         round = 9;
       }
       ballIndex = 0;
       round++;
       if (round == 9) {
         alert("game over");
+        soundFail.play();
       } else if (round < 9) {
         previousRecordRow[round].classList.remove("hidden");
       }
@@ -63,8 +69,26 @@ const setAnswerValue = function () {
     answerValue[2]++;
 };
 
-for (let i = 0; i < 10; i++)
+const playSound = function (audioName) {
+  if (audioName === "click") {
+    soundClick.play();
+  }
+  if (audioName == "pop") {
+    soundPop.play();
+  }
+};
+
+for (let i = 0; i < 10; i++) {
   numberBoardBtn[i].addEventListener("click", enterNumber);
+  numberBoardBtn[i].addEventListener("click", function () {
+    playSound("click");
+  });
+}
+for (let i = 0; i < 3; i++) {
+  inputRowBtn[i].addEventListener("click", function () {
+    playSound("pop");
+  });
+}
 inputRowBtn[0].addEventListener("click", deleteNumber);
 inputRowBtn[1].addEventListener("click", submitNumber);
 setAnswerValue();
