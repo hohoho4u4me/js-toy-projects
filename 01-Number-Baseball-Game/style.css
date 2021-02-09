@@ -68,7 +68,7 @@ div {
   width: 1.5rem;
   border-radius: 0.8rem;
   margin: 0.2rem;
-  font-size: 25px;
+  font-size: 0.83rem;
   background-color: var(--number-btn-color);
 }
 .previous-record__result {
@@ -134,7 +134,7 @@ div {
   justify-content: space-around;
 }
 .number-board__btn {
-  font-size: 38px;
+  font-size: 1.25rem;
   height: 2.3rem;
   width: 2.3rem;
   border-radius: 0.5rem;
@@ -146,4 +146,15 @@ div {
 }
 .hidden {
   display: none;
+}
+@media screen and (min-width: 330px) and (max-width: 600px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  html {
+    font-size: 16px;
+  }
 }
