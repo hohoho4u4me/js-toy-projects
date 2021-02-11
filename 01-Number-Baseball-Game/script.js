@@ -169,8 +169,12 @@ const submitNumber = function () {
         previousRecordRoundsLeft.innerText = `${9 - round} rounds left`;
       else if (round < 8)
         previousRecordRoundsLeft.innerText = `${9 - round} rounds left. Hurry!`;
-      else
+      else if (round < 9)
         previousRecordRoundsLeft.innerText = `${9 - round} round left. Hurry!`;
+      else
+        previousRecordRoundsLeft.innerText = `${
+          9 - round
+        } round left. You lost..`;
       if (round < 9) {
         previousRecordRow[round].classList.remove("hidden");
       }
@@ -203,6 +207,7 @@ const replay = function () {
   ballValue = [];
   ballIndex = 0;
   round = 0;
+  previousRecordRoundsLeft.innerText = `${9 - round} rounds left`;
   setAnswerValue();
 };
 const playSound = function (audioName) {
