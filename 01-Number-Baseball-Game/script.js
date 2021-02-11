@@ -10,6 +10,9 @@ const numberBoardBtn = document.querySelectorAll(".number-board__btn");
 const inputRowInput = document.querySelectorAll(".input-row__input");
 const inputRowBtn = document.querySelectorAll(".input-row__btn");
 const previousRecordRow = document.querySelectorAll(".previous-record__row");
+const previousRecordRoundsLeft = document.querySelector(
+  ".previous-record__rounds-left"
+);
 const soundClick = document.querySelector("#sound-click");
 const soundPop = document.querySelector("#sound-pop");
 const soundWin = document.querySelector("#sound-win");
@@ -162,6 +165,12 @@ const submitNumber = function () {
       ballValue = [];
       ballIndex = 0;
       round++;
+      if (round < 6)
+        previousRecordRoundsLeft.innerText = `${9 - round} rounds left`;
+      else if (round < 8)
+        previousRecordRoundsLeft.innerText = `${9 - round} rounds left. Hurry!`;
+      else
+        previousRecordRoundsLeft.innerText = `${9 - round} round left. Hurry!`;
       if (round < 9) {
         previousRecordRow[round].classList.remove("hidden");
       }
