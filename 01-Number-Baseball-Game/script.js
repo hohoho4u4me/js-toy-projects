@@ -186,8 +186,6 @@ const setAnswerValue = function () {
     answerValue[2]++;
   if (Math.max(answerValue[0], answerValue[1]) <= answerValue[2])
     answerValue[2]++;
-  answerValue = [7, 8, 0];
-  console.log(answerValue);
 };
 
 const replay = function () {
