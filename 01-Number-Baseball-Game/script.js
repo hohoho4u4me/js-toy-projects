@@ -67,7 +67,7 @@ const showMessage = function (name) {
     case 1:
       messageTitle.innerText = "How To Play";
       messageContent.innerHTML =
-        "Computer will choose three different numbers from 0 to 9.<br /> You will find what it is. <br /><br /> (ex) 9, 4, 6";
+        "Computer will choose three different numbers from 0 to 9.<br /> You need to find what it is. <br /><br /> (ex) 9, 4, 6";
       messageBtn[1].innerText = "NEXT";
       messageBtn[0].classList.add("hidden");
       messageBtn[1].classList.remove("hidden");
@@ -137,7 +137,7 @@ const submitNumber = function () {
       for (let i = 0; i < 3; i++) {
         if (answerValue.includes(ballValue[i])) {
           ball++;
-          for (let j = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
             if (i == j) continue;
             if (ballValue[i] === ballValue[j]) ballValue[j] = "";
           }
@@ -150,13 +150,13 @@ const submitNumber = function () {
       //win condition
       if (strike == 3) {
         showMessage("win");
-        //soundWin.play();
+        soundWin.play();
         round = 10;
       }
       //lose condition
       if (round == 8 && strike != 3) {
         showMessage("lose");
-        //soundFail.play();
+        soundFail.play();
       }
       //ready for next round
       ballValue = [];
@@ -186,6 +186,8 @@ const setAnswerValue = function () {
     answerValue[2]++;
   if (Math.max(answerValue[0], answerValue[1]) <= answerValue[2])
     answerValue[2]++;
+  answerValue = [7, 8, 0];
+  console.log(answerValue);
 };
 
 const replay = function () {
@@ -200,15 +202,14 @@ const playSound = function (audioName) {
   if (audioName === "click") {
     soundClick.play();
   }
-  if (audioName == "pop") {
+  if (audioName === "pop") {
     soundPop.play();
   }
 };
-for (let i = 0; i < 10; i++)
-  numberBoardBtn[i].addEventListener("click", function () {
-    enterNumber();
-    playSound("click");
-  });
+for (let i = 0; i < 10; i++) {
+  numberBoardBtn[i].addEventListener("click", enterNumber);
+  numberBoardBtn[i].addEventListener("click", () => playSound("click"));
+}
 
 for (let i = 0; i < 3; i++) {
   inputRowBtn[i].addEventListener("click", function () {
@@ -225,7 +226,7 @@ messageExit.addEventListener("click", function () {
   playSound("click");
 });
 messageBtn[0].addEventListener("click", function () {
-  if (this.innerText == "PREV") {
+  if (this.innerText === "PREV") {
     description--;
     hideMessage();
     showMessage(description);
@@ -236,13 +237,15 @@ messageBtn[0].addEventListener("click", function () {
   playSound("click");
 });
 messageBtn[1].addEventListener("click", function () {
-  if (this.innerText == "NEXT") {
+  if (this.innerText === "START") playSound("pop");
+  else playSound("click");
+  if (this.innerText === "NEXT") {
     description++;
     hideMessage();
     showMessage(description);
   } else {
     hideMessage();
   }
-  playSound("click");
 });
+//start the game with making answer values
 setAnswerValue();
