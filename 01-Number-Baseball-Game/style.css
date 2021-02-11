@@ -161,7 +161,7 @@ div {
   display: flex;
   justify-content: center;
 }
-.message > p {
+.message__content {
   margin-top: 0.4rem;
 }
 .message__btn {
@@ -172,6 +172,14 @@ div {
 }
 .message__btn:hover {
   transform: scale(1.1, 1.1);
+}
+.message__exit {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+}
+.message__exit:hover {
+  transform: scale(1.2, 1.2);
 }
 .screen {
   position: absolute;

@@ -13,6 +13,10 @@ const soundClick = document.querySelector("#sound-click");
 const soundPop = document.querySelector("#sound-pop");
 const soundWin = document.querySelector("#sound-win");
 const soundFail = document.querySelector("#sound-fail");
+const message = document.querySelector(".message");
+const messageBtn = document.querySelectorAll(".message__btn");
+const messageTitle = document.querySelector(".message__title");
+const messageContent = document.querySelector(".message__content");
 
 const enterNumber = function () {
   if (0 <= ballIndex && ballIndex <= 2) {
@@ -120,6 +124,82 @@ const playSound = function (audioName) {
   if (audioName == "pop") {
     soundPop.play();
   }
+};
+const hideMessage = function () {
+  message.classList.add("hidden");
+};
+const showMessage = function (name) {
+  switch (name) {
+    case "win":
+      messageTitle.innerText = "🎉You Won!🎉";
+      messageContent.innerText = `Answer was ${answerValue[0]}, ${answerValue[1]}, ${answerValue[2]}`;
+      messageBtn[0].innerText = "REPLAY";
+      messageBtn[1].innerText = "EXIT";
+      messageBtn[0].classList.remove("hidden");
+      messageBtn[1].classList.remove("hidden");
+      break;
+    case "lose":
+      messageTitle.innerText = "😭You Lose...😭";
+      messageContent.innerText = `Answer was ${answerValue[0]}, ${answerValue[1]}, ${answerValue[2]}..`;
+      messageBtn[0].innerText = "REPLAY";
+      messageBtn[1].innerText = "EXIT";
+      messageBtn[0].classList.remove("hidden");
+      messageBtn[1].classList.remove("hidden");
+      break;
+    case "reset":
+      messageTitle.innerText = "🤔Do you want to reset?🤔";
+      messageContent.innerText = "This will remove everything";
+      messageBtn[0].innerText = "YES";
+      messageBtn[1].innerText = "NO";
+      messageBtn[0].classList.remove("hidden");
+      messageBtn[1].classList.remove("hidden");
+      break;
+    /*how to play*/
+    case 1:
+      messageTitle.innerText = "How To Play";
+      messageContent.innerHTML =
+        "Computer will choose three different numbers from 0 to 9.<br /> You will find what it is. <br /><br /> (ex) 9, 4, 6";
+      messageBtn[1].innerText = "NEXT";
+      messageBtn[0].classList.add("hidden");
+      messageBtn[1].classList.remove("hidden");
+      break;
+    case 2:
+      messageTitle.innerText = "How To Play";
+      messageContent.innerHTML =
+        "There are 9 rounds per game. <br />Each round you can guess the three numbers.";
+      messageBtn[0].innerText = "PREV";
+      messageBtn[1].innerText = "NEXT";
+      messageBtn[0].classList.remove("hidden");
+      messageBtn[1].classList.remove("hidden");
+      break;
+    case 3:
+      messageTitle.innerText = "How To Play";
+      messageContent.innerHTML =
+        "If your guess has the same number in the same location, it's 1 strike that is represented as red. <br /><br />(ex) 9, 4, 5 for answer 9, 4, 7 is <br />2 strike (2 🔴)";
+      messageBtn[0].innerText = "PREV";
+      messageBtn[1].innerText = "NEXT";
+      messageBtn[0].classList.remove("hidden");
+      messageBtn[1].classList.remove("hidden");
+      break;
+    case 4:
+      messageTitle.innerText = "How To Play";
+      messageContent.innerHTML =
+        "If your guess has the same number in the different location, it's 1 ball that is represented as yellow. <br /><br />(ex)  4, 9, 5 for answer 9, 4, 7 is <br /> 2 ball (2 🟡)";
+      messageBtn[0].innerText = "PREV";
+      messageBtn[1].innerText = "NEXT";
+      messageBtn[0].classList.remove("hidden");
+      messageBtn[1].classList.remove("hidden");
+      break;
+    case 5:
+      messageTitle.innerText = "How To Play";
+      messageContent.innerHTML =
+        "If you find the answer within 9 rounds, you will win. <br /> If you don't, you will lose. Good Luck.";
+      messageBtn[0].innerText = "PREV";
+      messageBtn[0].classList.remove("hidden");
+      messageBtn[1].classList.add("hidden");
+      break;
+  }
+  message.classList.remove("hidden");
 };
 
 for (let i = 0; i < 10; i++) {
