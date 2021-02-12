@@ -171,10 +171,11 @@ const submitNumber = function () {
         previousRecordRoundsLeft.innerText = `${9 - round} rounds left. Hurry!`;
       else if (round < 9)
         previousRecordRoundsLeft.innerText = `${9 - round} round left. Hurry!`;
-      else
+      else if (round == 9)
         previousRecordRoundsLeft.innerText = `${
           9 - round
         } round left. You lost..`;
+      else previousRecordRoundsLeft.innerText = "Congrats! You won!";
       if (round < 9) {
         previousRecordRow[round].classList.remove("hidden");
       }
@@ -199,6 +200,7 @@ const setAnswerValue = function () {
     answerValue[2]++;
   if (Math.max(answerValue[0], answerValue[1]) <= answerValue[2])
     answerValue[2]++;
+  console.log(answerValue);
 };
 
 const replay = function () {
